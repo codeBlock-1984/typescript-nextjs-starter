@@ -1,13 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
-
+import { formatFileSize } from '@/utils/files';
+import { format } from '@/utils/dates';
 interface ITable {
   columns: string[];
+  data: Array<{ [i: string]: any }>
 }
 
 type IProps = ITable;
 
 const StyledTable = styled.table`
+  margin: 20px;
+  width: 600px;
   border: 1px solid #efefef;
   border-radius: 6px;
   border-spacing: 1;
@@ -21,9 +25,18 @@ const StyledTableRowHeader = styled.tr`
 `;
 
 const StyledTableHeader = styled.th`
-  min-width: 150px;
+  min-width: 250px;
   text-align: left;
   padding: 12px;
+  &:nth-child(2) {
+    min-width: 120px !important;
+  }
+  &:nth-child(4) {
+    min-width: 120px !important;
+  }
+  &:nth-child(5) {
+    min-width: 50px !important;
+  }
 `;
 
 const StyledTableRow = styled.tr`
@@ -37,23 +50,25 @@ const StyledTableData = styled.td`
   border: none;
 `;
 
-export const Table: React.FC<IProps> = ({ columns }) => (
+export const Table: React.FC<IProps> = ({ columns, data }) => (
   <StyledTable>
     <tbody>
       <StyledTableRowHeader>
         {columns.map((column) => (
-          <StyledTableHeader>{column}</StyledTableHeader>
+          <StyledTableHeader key={column}>{column}</StyledTableHeader>
         ))}
       </StyledTableRowHeader>
-      <StyledTableRow>
-        <StyledTableData>TableRow</StyledTableData>
-        <StyledTableData>TableRow</StyledTableData>
-        <StyledTableData>TableRow</StyledTableData>
-        <StyledTableData>TableRow</StyledTableData>
-        <StyledTableData>
-          <button type="submit">X</button>
-        </StyledTableData>
-      </StyledTableRow>
+      {data.map((row) => (
+          <StyledTableRow key={row.id}>
+            <StyledTableData>{row.name}</StyledTableData>
+            <StyledTableData>{formatFileSize(row.size)}</StyledTableData>
+            <StyledTableData>{format(row.updatedAt, '{dd}.{MM}.{yyyy} {hh}:{mm}{tt}')}</StyledTableData>
+            <StyledTableData>{row.format.toLowerCase()}</StyledTableData>
+            <StyledTableData>
+              <button type="submit">X</button>
+            </StyledTableData>
+        </StyledTableRow>
+      ))}
     </tbody>
   </StyledTable>
 );

@@ -13,6 +13,7 @@ const StyledButton = styled.button`
   border: 1px solid #979797;
   padding: 12px;
   color: #2d0d85;
+  margin-left: 15px;
 `;
 
 export const PrimaryButton: React.FC<IProps> = ({ children }) => (
