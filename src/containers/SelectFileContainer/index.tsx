@@ -14,7 +14,9 @@ const StyledHeadline = styled.h1`
 `;
 
 const StyledContainer = styled.div`
-  min-height: 200px;
+  width: 300px;
+  padding: 20px 0px;
+  margin: 20px;
 `;
 
 export const SelectFileContainer: React.FC<IProps> = ({

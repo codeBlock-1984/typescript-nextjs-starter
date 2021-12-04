@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import { InferGetStaticPropsType } from 'next';
 import { Table } from '@/components/Table';
 import { PrimaryButton } from '@/components/PrimaryButton';
 import { SelectFileContainer } from '@/containers/SelectFileContainer';
@@ -11,11 +12,40 @@ const StyledFileInput = styled.input`
   margin: 12px 0;
 `;
 
-const StyledButtonWrapper = styled.div`
-  display: flex;
+const StyledSubtitle = styled.h2`
+  font-size: 18px;
+  color: #2d0d85;
+  font-family: Arial;
+  margin: 20px;
 `;
 
-export default function Home() {
+const StyledButtonWrapper = styled.div`
+  display: flex;
+  flex-direction: row-reverse;
+
+`;
+
+interface File {
+  id: number;
+  name: string;
+  size: number;
+  format: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export const getStaticProps = async () => {
+  const res = await fetch('http://localhost:3600/api/v1/files');
+  const files: File[] = (await res.json()).data.records;
+
+  return {
+    props: {
+      files,
+    },
+  }
+}
+
+export default function Home({ files }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <div>
       <Head>
@@ -29,8 +59,10 @@ export default function Home() {
           <PrimaryButton>Save File</PrimaryButton>
         </StyledButtonWrapper>
       </SelectFileContainer>
+      <StyledSubtitle>File History</StyledSubtitle>
       <Table
         columns={[`Filename`, `File Size`, `Last Modified`, `File Format`, ``]}
+        data={files}
       />
     </div>
   );
