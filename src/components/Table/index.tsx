@@ -4,7 +4,8 @@ import { formatFileSize } from '@/utils/files';
 import { format } from '@/utils/dates';
 interface ITable {
   columns: string[];
-  data: Array<{ [i: string]: any }>
+  data: Array<{ [i: string]: any }>;
+  handler: (id: number) => void;
 }
 
 type IProps = ITable;
@@ -50,7 +51,7 @@ const StyledTableData = styled.td`
   border: none;
 `;
 
-export const Table: React.FC<IProps> = ({ columns, data }) => (
+export const Table: React.FC<IProps> = ({ columns, data, handler }) => (
   <StyledTable>
     <tbody>
       <StyledTableRowHeader>
@@ -65,7 +66,7 @@ export const Table: React.FC<IProps> = ({ columns, data }) => (
             <StyledTableData>{format(row.updatedAt, '{dd}.{MM}.{yyyy} {hh}:{mm}{tt}')}</StyledTableData>
             <StyledTableData>{row.format.toLowerCase()}</StyledTableData>
             <StyledTableData>
-              <button type="submit">X</button>
+              <button type="button" onClick={() => handler(row.id)}>X</button>
             </StyledTableData>
         </StyledTableRow>
       ))}

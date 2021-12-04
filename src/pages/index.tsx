@@ -126,7 +126,7 @@ export default function Home({ files }: InferGetStaticPropsType<typeof getStatic
     };
 
     const res = await fetch('http://localhost:3600/api/v1/files', options);
-    const json = (await res.json())
+    const json = (await res.json());
     if (json.status === 201) {
       setState([ json.data, ...state ]);
       handleReset();
@@ -141,6 +141,20 @@ export default function Home({ files }: InferGetStaticPropsType<typeof getStatic
       input.value = '';
     }
     setSelectedFile({});
+  };
+
+  // deletes a file
+  const handleDelete = async (id: number) => {
+    const options = {
+      method: 'DELETE'
+    };
+
+    const res = await fetch(`http://localhost:3600/api/v1/files/${id}`, options);
+    const json = (await res.json());
+    if (json.status === 200) {
+      setState(state.filter(i => i.id !== json.data.id));
+      setAlert(json.message);
+    }
   };
 
 
@@ -163,6 +177,7 @@ export default function Home({ files }: InferGetStaticPropsType<typeof getStatic
       <Table
         columns={[`Filename`, `File Size`, `Last Modified`, `File Format`, ``]}
         data={state}
+        handler={handleDelete}
       />
     </div>
   );
