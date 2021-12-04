@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface IPrimaryButton {
-  // Props
+  handler: () => void;
 }
 
 type IProps = IPrimaryButton;
@@ -16,6 +16,6 @@ const StyledButton = styled.button`
   margin-left: 15px;
 `;
 
-export const PrimaryButton: React.FC<IProps> = ({ children }) => (
-  <StyledButton>{children}</StyledButton>
+export const PrimaryButton: React.FC<IProps> = ({ children, handler }) => (
+  <StyledButton onClick={handler}>{children}</StyledButton>
 );

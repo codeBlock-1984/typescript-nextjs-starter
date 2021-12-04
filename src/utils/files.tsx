@@ -8,8 +8,17 @@ const validExtensions = [
   `application/pdf`,
 ];
 
+const fileTypes: { [key: string]: unknown } = {
+  'application/vnd.openxmlformats-officedocument.wordprocessingml.document': 'docx',
+  'application/msword': 'doc',
+  'application/pdf': 'pdf'
+};
+
 export const isValidFileType = (file: File) =>
   validExtensions.indexOf(file.type) > -1;
+
+export const getFileType = (fileType: string) => 
+  fileTypes[fileType];
 
 export const formatFileSize = (bytes: number): string => {
   if (bytes / GB_TO_BYTES_RATIO > 1) {
