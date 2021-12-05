@@ -1,27 +1,43 @@
-## A TypeScript starter for Next.js
+# Fila
 
-- 📏 **ESLint** — Pluggable JavaScript linter
-- 💖 **Prettier** - Opinionated Code Formatter
-- 🖌 **Renovate** - Dependency update tool
-- 🗂 **Absolute import** - Import folders and files using the `@` prefix
+Fila is an application for working with file metadata. You can store your file metadata, retrieve, and delete specific file information via REST endpoints.
 
-## 🚀 Getting started
+![fila](https://res.cloudinary.com/free-spirit/image/upload/v1638704852/Screenshot_2021-12-05_at_12.46.21.png)
 
-The best way to start with this template is using `create-next-app`.
 
+## Built With
+
+This project is built with the following template:
+* [TypeScript starter for Next.js](https://github.com/XD2Sketch/typescript-nextjs-starter)
+
+## Getting Started
+
+To setup a local copy of the project, clone the repository by running the command below in your terminal.
+
+```sh
+git clone https://github.com/codeBlock-1984/fila.git
 ```
-npx create-next-app xd2sketch-coding-ts -e https://github.com/XD2Sketch/typescript-nextjs-starter
+
+## Installation
+
+1. To install the project packages, navigate to the project root and run the command below:
+   ```sh
+   npm install
+   ```
+
+## Usage
+
+To start the local app run the command below:
+```sh
+npm run dev
 ```
+You should see the message `event - compiled successfully` in the console. Go to http://localhost:3000 on your browser to access the app.
 
-If you prefer you can clone this repository and run the following commands inside the project folder:
 
-2. `yarn dev`;
+1. Upload a file.
 
-To view the project open `http://localhost:3000`.
-## 📝 License
+2. Delete a file.
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for more information.
+## License
 
----
-
-Made with ♥ by João Pedro Schmitz
+Distributed under the MIT License. See `LICENSE.txt` for more information.
